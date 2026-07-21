@@ -74,6 +74,16 @@ def get_stats():
     )
     stats["hashes"] = cursor.fetchone()[0]
 
+    cursor.execute(
+        "SELECT COUNT(*) FROM activity WHERE tool='Universal Decoder'"
+    )
+    stats["decoders"] = cursor.fetchone()[0]
+
+    cursor.execute(
+        "SELECT COUNT(*) FROM activity WHERE tool='HTTP Header Scanner'"
+    )
+    stats["headers"] = cursor.fetchone()[0]
+
     conn.close()
 
     return stats
